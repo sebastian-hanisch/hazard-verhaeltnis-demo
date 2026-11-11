@@ -1,7 +1,6 @@
 # Was das Hazard-Verhältnis misst – Streamlit-Demo
 
-<!-- TODO nach dem Deploy: direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-hazard-verhaeltnis-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-hazard-verhaeltnis-demo.streamlit.app/)**
 
 Teil der Linie **Überlebenszeit** (Zeit bis zum Ereignis bei Beobachtungen, die irgendwann abbrechen) in der „Konzepte“-Reihe für die Website „Sebastian Hanisch – Operations Research und Machine Learning“.
 Der Aufhänger ist die Abholung von Containern: Eine **Maßnahme** (etwa eine andere Abfertigungsregel) vervielfacht die Abholrate **jedes einzelnen** Containers mit demselben Faktor. Das **Hazard-Verhältnis**
@@ -9,7 +8,7 @@ Der Aufhänger ist die Abholung von Containern: Eine **Maßnahme** (etwa eine an
 etwas anderes misst als den Faktor, den jeder Container erfährt (unterschiedliche Anfälligkeit; ein weggelassenes Merkmal bei zufälliger Zuteilung), liest dieselben Daten als Überlebenswahrscheinlichkeit
 und mittlere Verweilzeit bis zu einem festen Zeitpunkt τ und stellt den **fachlichen Streit** um das Hazard-Verhältnis als Streit dar, mit der Lesestufe jeder Quelle.
 
-Kante der Linie: Stück 5 (Proportionalität prüfen) → Stück 6, als Kontrast: Auch ohne Kreuzung der Raten ist ein Hazard-Verhältnis schwer zu deuten. Nachbarn:
+Einordnung in der Linie: Auf die Prüfung der Proportionalität folgt diese Demo als Kontrast: Auch ohne Kreuzung der Raten ist ein Hazard-Verhältnis schwer zu deuten. Nachbarn:
 [cox-regression-demo](https://github.com/sebastian-hanisch/cox-regression-demo) (das Verfahren, das hier gedeutet wird), [proportionalitaet-demo](https://github.com/sebastian-hanisch/proportionalitaet-demo) (Prüfung, ob ein
 einziges Hazard-Verhältnis zu den Daten passt), [log-rank-demo](https://github.com/sebastian-hanisch/log-rank-demo) (mittlere Lebenszeit bis τ als zweite Antwort beim Gruppenvergleich).
 Gleicher Aufhänger Containerverweilzeit wie [verweilzeit-demo](https://github.com/sebastian-hanisch/verweilzeit-demo).
@@ -32,7 +31,7 @@ Rate eines Containers: 0,1 je Tag · Z · f^x mit der Gruppe x (1 Maßnahme, 0 K
 Experiment 3: statt Z ein zweites Merkmal, standardnormal, Rate · e^(γz)). Die Verweilzeit ist bei gegebener Rate exponentiell verteilt. Bei gamma-verteilter Anfälligkeit gilt geschlossen
 HR(t) = f (1 + vλt) / (1 + f vλt) (Herleitung im Expander „📐 Mathematische Formulierung“ der App: Laplace-Transformierte der Gamma-Verteilung, marginale Überlebensfunktion (1 + vλf^x t)^(−1/v)); dort stehen auch
 der **Grenzwert des Cox-Schätzers** für unendlich viele Container (Nullstelle des erwarteten Scores, numerisch integriert und mit Bisektion gelöst), die Formeln für Experiment 3 und für Kaplan–Meier mit Greenwood-Band und die mittlere
-Verweilzeit bis τ. Der Kern (`hzv_core.py`) ist eine Kopie aus der Linien-Vorlage (`ueberlebenszeit-planung/kern/uz_core.py`, Stand 2026-11-10, mit der Trennungserkennung auch bei einem einzigen Ereignis):
+Verweilzeit bis τ. Der Kern (`hzv_core.py`) ist eine Kopie des gemeinsamen Kerns `uz_core.py` der Überlebenszeit-Linie (Stand 2026-11-10, mit der Trennungserkennung auch bei einem einzigen Ereignis):
 SplitMix64-Zufall, Eingabeprüfung, Kaplan–Meier mit Greenwood-Band, mittlere Lebenszeit bis τ mit Varianz und z-Test, Cox mit Newton-Schrittweitenhalbierung und Konvergenzflag. Die Gamma-Zufallszahlen
 (Marsaglia und Tsang) kommen aus dem SplitMix64-Strom (`hzv_scenario.py`).
 
@@ -119,7 +118,7 @@ v = 2:
 | 1,0 | 1,0 | 0,002 ± 0,007 | −0,005 ± 0,007 | 0,004 ± 0,004 |
 | 1,0 | 2,0 | 0,019 ± 0,007 | 0,000 ± 0,008 | 0,005 ± 0,004 |
 
-Der Grenzwert ist in jeder Phase genau 0. Das Mittel der Läufe liegt in 6 von 6 Zellen (zwei Varianzen mal 3 Phasen) innerhalb von 3 Standardfehlern von 0; die größte Abweichung beträgt 2,8 Standardfehler (v = 2, Phase früh). **Ohne Wirkung gibt es keinen Drift:** Wo die Maßnahme keine Rate ändert, ist nichts da, was die Auswahl der Übrigen verzerren könnte (Lesart des Lektüre-Berichts, siehe Hernán 2010 in der Tabelle unten).
+Der Grenzwert ist in jeder Phase genau 0. Das Mittel der Läufe liegt in 6 von 6 Zellen (zwei Varianzen mal 3 Phasen) innerhalb von 3 Standardfehlern von 0; die größte Abweichung beträgt 2,8 Standardfehler (v = 2, Phase früh). **Ohne Wirkung gibt es keinen Drift:** Wo die Maßnahme keine Rate ändert, ist nichts da, was die Auswahl der Übrigen verzerren könnte (eigene Lesart, siehe Hernán 2010 in der Tabelle unten).
 
 **3. Warum? Die mittlere Anfälligkeit der Übrigen** (v = 1, Faktor 2, 200 Läufe, Mittel über die Läufe der mittleren Anfälligkeit Z unter den Containern, die bei Zeit t noch da sind; in Klammern die Formel
 1/(1 + vλ f^x t), das Verhältnis gegen HR(t)/f). Bei gamma-verteilter Anfälligkeit ist das Hazard-Verhältnis der Übrigen genau f mal dem Verhältnis der mittleren Anfälligkeit der Übrigen.
@@ -181,7 +180,7 @@ Die Mittel der Differenzen über die Läufe liegen bei allen vier τ innerhalb v
 
 **7. Zwei Klassen von Hand (Experiment 1).** Standardbeispiel (Raten 1 und 4 je Tag, je 50 %, Faktor 2): Das Verhältnis der marginalen Raten startet bei 2, hat seinen Tiefpunkt 1,47 bei Tag 0,445 (Gitter 0,001 Tage) und liegt bei Tag 6 wieder bei 2,00. Raten 1 und 1,5: Tiefpunkt 1,87 bei Tag 2,248, bei Tag 6 1,96.
 
-**Handbeispiel (Raten 1 und 4 je Tag, je 50 %, Maßnahme verdoppelt jede Rate; von Hand gerechnet in `ueberlebenszeit-planung/handbeispiele.py`):**
+**Handbeispiel (Raten 1 und 4 je Tag, je 50 %, Maßnahme verdoppelt jede Rate; von Hand gerechnet):**
 
 | Zeit t (Tage) | Rate Kontrolle | Rate Maßnahme | Verhältnis |
 |---|---|---|---|
@@ -205,24 +204,24 @@ langsamere Klasse übrig ist. Das ist ein Unterschied zur gamma-verteilten Anfä
 | Messung 1 bis 7 (alle Tabellen und Prosa-Zahlen oben) | eingefroren in `tools/measure_hazard_result.json`; `tests/test_claims.py` vergleicht jede Tabelle wörtlich und rechnet die Zellen Standard (v = 1), Experiment 3 (γ = 1), Experiment 4 (τ = 10) und die beiden Klassen-Beispiele neu (Band 1e-6; Zählungen exakt) |
 | Zellen v = 0, 0,5, 2, 3, Seeds, n = 400, 1000, 3000, Faktoren, andere γ und τ | nur eingefroren, nicht im Test neu gerechnet |
 
-**Vormessung zum Vergleich** (Wegwerf-Skript mit numpy-Zufall, `ueberlebenszeit-planung/vormessung/out_uz_v12_bis_v15.txt`, 200 Läufe, V12 und V13): v = 0: früh 0,695, spät 0,694; v = 1: früh 0,589, mittel 0,406, spät 0,174 ± 0,005;
+**Erste Messung zum Vergleich** (vor dem Bau der Demo mit einem einfachen Skript gemessen, NumPy-Zufall, 200 Läufe): v = 0: früh 0,695, spät 0,694; v = 1: früh 0,589, mittel 0,406, spät 0,174 ± 0,005;
 v = 2: früh 0,519, spät 0,074 ± 0,004; zufällige Zuteilung, Wirkung 0,70: Cox nur mit x 0,441 ± 0,003, mit x und z 0,699 ± 0,003. Die Werte dieser Demo weichen zufallsbedingt ab (anderer Zufallsgenerator,
-Faktor 2 statt Wirkung 0,70 in V13); siehe „Befunde und Korrekturen gegenüber dem Plan“.
+Faktor 2 statt Wirkung 0,70 bei der zufälligen Zuteilung); siehe „Befunde und Korrekturen gegenüber der ersten Messung“.
 
 ## Der Streit um das Hazard-Verhältnis
 
-Die Demo stellt die Positionen **als Streit** dar, nicht als Urteil (Plan-Entscheidung Z7). Die Tabelle gibt sie in eigenen Worten wieder, mit der **Lesestufe** der Quelle. *Volltext selbst gelesen:* Text aus der PDF gelesen.
+Die Demo stellt die Positionen **als Streit** dar, nicht als Urteil. Die Tabelle gibt sie in eigenen Worten wieder, mit der **Lesestufe** der Quelle. *Volltext selbst gelesen:* Text aus der PDF gelesen.
 *Volltext über Abruf:* Volltextseite vom Abrufwerkzeug zusammengefasst, Rohtext nicht selbst gesehen; Zahlen und Satzbau sind vor einer Veröffentlichung im PDF gegenzulesen. *Abstract:* nur Kurzfassung.
 
 | Position | Lesestufe | Aussage in eigenen Worten | Was diese Demo dazu zeigt und was nicht |
 |---|---|---|---|
-| **Hernán (2010)**, Epidemiology 21(1):13–15 (Kommentar) | Volltext über Abruf | Ein über die Nachbeobachtung gemitteltes HR hängt von deren Dauer ab. Periodenspezifische HR enthalten eine eingebaute Auswahlverzerrung: Anfälligere der behandelten Gruppe scheiden früher aus, späte HR sinken Richtung oder unter 1. Empfohlen: angepasste Überlebenskurven und eine Reihe gemittelter HR. Der Text enthält weder eine Simulation noch eine Herleitung. *Lesart des Lektüre-Berichts dieser Linie (nicht wörtlich bei Hernán belegt):* Die Verzerrung setzt eine Wirkung der Behandlung voraus (etwa frühe Schädigung); bei strenger Nullwirkung gibt es sie nicht; bei Ying und Xu steht dazu sinngemäß, die Gruppen nach dem Überleben seien nur unter der scharfen Nullhypothese identisch (nicht wörtlich geprüft). | Der Mechanismus tritt in Experiment 2 auf (HR der Übrigen sinkt gegen 1), die Abhängigkeit von der Nachbeobachtung steht in Befund 4, und ohne Wirkung (Faktor 1) gibt es keinen Drift (Befund 2). Nicht gezeigt: ein Fall unter 1 (hier beschleunigt die Maßnahme in jedem Container die Abholung) und wie stark der Effekt in echten Studien ist. |
+| **Hernán (2010)**, Epidemiology 21(1):13–15 (Kommentar) | Volltext über Abruf | Ein über die Nachbeobachtung gemitteltes HR hängt von deren Dauer ab. Periodenspezifische HR enthalten eine eingebaute Auswahlverzerrung: Anfälligere der behandelten Gruppe scheiden früher aus, späte HR sinken Richtung oder unter 1. Empfohlen: angepasste Überlebenskurven und eine Reihe gemittelter HR. Der Text enthält weder eine Simulation noch eine Herleitung. *Eigene Lesart (nicht wörtlich bei Hernán belegt):* Die Verzerrung setzt eine Wirkung der Behandlung voraus (etwa frühe Schädigung); bei strenger Nullwirkung gibt es sie nicht; bei Ying und Xu steht dazu sinngemäß, die Gruppen nach dem Überleben seien nur unter der scharfen Nullhypothese identisch (nicht wörtlich geprüft). | Der Mechanismus tritt in Experiment 2 auf (HR der Übrigen sinkt gegen 1), die Abhängigkeit von der Nachbeobachtung steht in Befund 4, und ohne Wirkung (Faktor 1) gibt es keinen Drift (Befund 2). Nicht gezeigt: ein Fall unter 1 (hier beschleunigt die Maßnahme in jedem Container die Abholung) und wie stark der Effekt in echten Studien ist. |
 | **Abrahamowicz u. a. (2025)**, Eur. J. Epidemiol. 40(6):611–629 (Simulationen, Fallstudien) | Volltext über Abruf (rund 100 000 von 122 000 Zeichen; Referenzen und Zusatzmaterial fehlen) | Bestätigen den Mechanismus (Erschöpfung Anfälliger, Verzerrung zur Null). Halten ihn **für die nachgebaute WHI-Studie unter den geprüften Annahmen** für eine sehr unwahrscheinliche Erklärung der beobachteten Kreuzung; bei sehr starker Anfälligkeit (HR der Anfälligkeit 25) bleibt ein Bias bis etwa 58 %, bei HR der Anfälligkeit höchstens 5 unter 20 % (Gesamt-HR). Nach Ansicht der Autoren habe Hernán seine Behauptung weder algebraisch noch per Simulation gestützt. Ihr Gesamtschluss, nur für die nachgebaute WHI-Konstellation unter den geprüften Annahmen: Als Alternativen zur Anfälligkeit nennen sie Nichteinnahme und echte zeitabhängige Wirkung; Bedenken gegen das HR könnten übertrieben sein. | Die Größe des Effekts hängt an Stärke und Streuung der Anfälligkeit (Experiment 2: Regler v). Die Welt der Demo (gamma-verteilte Anfälligkeit, kein WHI-Nachbau) ist nicht ihre; die Zahlen sind nicht vergleichbar, und die Demo entscheidet nicht, ob echte Daten so streuen. |
 | **Ying und Xu**, arXiv 2307.11971 (v2, Okt. 2023), „On Defense of the Hazard Ratio“ | Volltext selbst gelesen | Streit um den **Kausalbegriff**, nicht um den Mechanismus. Ihr Hauptergebnis: Die Hazard-Funktion habe in den drei Rahmen von Rubin, Robins und Pearl eine kausale Deutung. Nach der strengen Definition von Rubin sei das HR über Risikomengen nicht kausal (außer bei der scharfen Nullhypothese), nach Robins und Pearl schon. Die Erschöpfung der Anfälligen sei die bekannte unbeobachtete Heterogenität. Ob ein späteres niedrigeres Hazard Wirkung oder Auswahl ist, lasse sich an den Überlebenskurven prüfen (im reinen Auswahlfall kreuzen sie sich nicht; kreuzen sie sich, deute das auf eine echte Wirkung; zusätzlich können Sensitivitätsanalysen nötig sein); man solle den ganzen Verlauf des HR ansehen, nicht einen späten Zeitpunkt allein. | Die Überlebenskurven kreuzen sich in dieser Welt nicht (Experiment 1 und Formel in Experiment 2), und die Wirkung je Container ist konstant: Das Absinken ist hier reine Auswahl. Zur Kausalfrage selbst sagt die Demo nichts. |
 | **Royston und Parmar (2013)**, BMC Med. Res. Methodol. 13:152 | Volltext über Abruf (rund 200 000 von 218 000 Zeichen) | Die mittlere Lebenszeit bis τ (RMST) als Alternative: Verlust an Lebenszeit bis τ, gültig ohne Proportionalität, relatives und absolutes Maß. Für die Hauptanalyse legen sie ein **vorab festgelegtes** τ zugrunde; in ihrer Simulation hat der RMST-Test bei einem nicht proportionalen Szenario eine höhere Trennschärfe als der Log-Rank-Test. Nachteil laut Tabelle 5: τ muss gewählt werden. | Experiment 4 liest dieselben Daten als Überlebenswahrscheinlichkeit und mittlere Verweilzeit bis τ. Die Trennschärfe vergleicht diese Demo nicht. |
 
-Die in der Neuanalyse genannte Übersicht über 27 große Studien (Strobel u. a. 2023) wurde nicht gefunden und ist hier nicht verwendet; eine „GMDS-Auswertung von 28 Studien“ ist nicht belegt und kommt nicht vor.
-Hernán (2010), die Neuanalyse 2025 und Royston und Parmar (2013) sind nur über Abruf-Zusammenfassungen gelesen. Hernáns Empfehlung nennt die mittlere Lebenszeit nicht (im gelesenen Text nicht gefunden); die Demo übernimmt diese Alternative von Royston und Parmar (2013). Marsaglia und Tsang (2000) und Greenwood (1926) sind
+Die in Abrahamowicz u. a. (2025) genannte Übersicht über 27 große Studien (Strobel u. a. 2023) wurde nicht gefunden und ist hier nicht verwendet; eine „GMDS-Auswertung von 28 Studien“ ist nicht belegt und kommt nicht vor.
+Hernán (2010), Abrahamowicz u. a. (2025) und Royston und Parmar (2013) sind nur über Abruf-Zusammenfassungen gelesen. Hernáns Empfehlung nennt die mittlere Lebenszeit nicht (im gelesenen Text nicht gefunden); die Demo übernimmt diese Alternative von Royston und Parmar (2013). Marsaglia und Tsang (2000) und Greenwood (1926) sind
 aus dem Gedächtnis genannt, die Originale sind nicht eingesehen.
 
 ## Ehrliche Grenzen
@@ -253,22 +252,21 @@ aus dem Gedächtnis genannt, die Originale sind nicht eingesehen.
   Messung, wie sich ein nach den Daten gewähltes τ auf ein Testniveau auswirkt.
 - Die Maßnahme beschleunigt in jedem Container die Abholung (Faktor größer als 1, oder 1 ohne Wirkung): Ein Hazard-Verhältnis unter 1 kommt in dieser Welt nicht vor.
 
-## Befunde und Korrekturen gegenüber dem Plan
+## Befunde und Korrekturen gegenüber der ersten Messung
 
-Plan: `ueberlebenszeit-planung/PLAN-06-hazard-verhaeltnis.md`.
+Die erste Messung ist ein einfaches Skript, das vor dem Bau der Demo lief (NumPy-Zufall, 200 Läufe); die Demo rechnet mit SplitMix64. Dieser Abschnitt nennt, wo die Demo von der ersten Messung und der ursprünglichen Erwartung abweicht.
 
-- **Zahlen (V12):** Plan (numpy-Zufall, v = 1): früh 0,589, mittel 0,406, spät 0,174 ± 0,005. Hier: 0,592, 0,400 und 0,169 (± 0,005); die späte Phase liegt über fünf weitere Zufalls-Seeds zwischen 0,158 und 0,171 (Grenzwert 0,164): Der Planwert 0,174 war ein Ausschlag nach oben. Bei v = 2 nennt der Plan früh 0,519, mittel 0,272, spät 0,074; hier 0,541, 0,297 und 0,075, wobei die frühe Phase in den fünf weiteren Zufalls-Seeds zwischen 0,519 und 0,538 liegt (Grenzwert 0,525). Es gilt die Zahl dieser Demo.
-- **Zahlen (V13):** Plan Cox nur mit x 0,441 ± 0,003 und mit x und z 0,699 ± 0,003 (Wirkung 0,70 je Container); hier 0,438 ± 0,003 und 0,695 ± 0,003 (Wirkung ln 2 = 0,693 je Container, weil die App den Faktor 2 statt 0,70 nutzt).
-- **Prüfung der Formel:** Der Plan prüft die geschlossene Formel an einem Punkt (HR(5,5) = 1,48, ln = 0,39, gegen die mittlere Phase 0,406). Eine Punktprüfung ist grob, weil Cox in einem Fenster über viele Zeiten mittelt; hier steht stattdessen der Grenzwert des Cox-Schätzers im Fenster (Integration über die Formel), gegen den die Läufe in 15 Zellen gezählt werden (Befund 1). Der Planpunkt bleibt als Handwert in `tests/test_model.py`.
-- **Neu gegenüber dem Plan:** die Zellen ohne Wirkung (Befund 2), die gemessene mittlere Anfälligkeit der Übrigen (Befund 3), die Abhängigkeit des einzelnen Hazard-Verhältnisses von der Nachbeobachtung (Befund 4), v = 3 und andere Faktoren und Stichprobengrößen.
-- **Plan-Lücke „RMST-Differenz gegen Hazard bei denselben Daten“:** gebaut als Experiment 4 (Befund 6), gemessen als Differenz und Überdeckung des Intervalls, nicht als Trennschärfe-Vergleich zweier Tests.
-- **Offene Lücke des Plans bleibt offen:** Die Gamma-Verteilung der Anfälligkeit ist eine Annahme; ob echte Hafendaten so streuen, zeigt die Demo nicht.
-- **Schnelle Cox-Anpassung:** Der Plan sah nur den Kern vor. Die Schleife des Kerns über die Ereigniszeiten ist für 200 Läufe mit je neun Anpassungen und n = 2000 zu langsam für eine App; `cox_fast` (vektorisierte Hesse-Matrix) ersetzt sie für die Läufe und wird in den Tests gegen den Kern (40 Instanzen, bis 1e-9) und gegen eine Nullstellensuche ohne Newton gehalten. Der Kern bleibt für die Einzelanpassung mit Status zuständig (Handbeispiele, Tests).
-- **Z1 bis Z4 des Plans:** Z1 (Name, Präfix `hzv_`, Port 9545) wie vorgeschlagen; Z2 (Streit als Streit, mit Lesestufen) umgesetzt; Z3 beachtet: Die App und diese README urteilen nicht über das Hazard-Verhältnis selbst, sie sagen nur „in dieser Annahme verändert es sich so“ (ein Test sucht Urteilswörter in beiden Texten); Z4 (Zusammenlegung mit Stück 5) nicht umgesetzt.
-- **Regler der Klassen:** Die Raten der Klasse A (0,2 bis 1,0) und der Klasse B (1,5 bis 10) überlappen sich nicht, damit B immer die schnellere Klasse ist; der Plan nennt nur das Beispiel 1 und 4 mit Anteil 50 %.
+- **Zahlen (Experiment 2):** erste Messung (NumPy-Zufall, v = 1): früh 0,589, mittel 0,406, spät 0,174 ± 0,005. Hier: 0,592, 0,400 und 0,169 (± 0,005); die späte Phase liegt über fünf weitere Zufalls-Seeds zwischen 0,158 und 0,171 (Grenzwert 0,164): Der Wert 0,174 der ersten Messung war ein Ausschlag nach oben. Bei v = 2 nannte die erste Messung früh 0,519, mittel 0,272, spät 0,074; hier 0,541, 0,297 und 0,075, wobei die frühe Phase in den fünf weiteren Zufalls-Seeds zwischen 0,519 und 0,538 liegt (Grenzwert 0,525). Es gilt die Zahl dieser Demo.
+- **Zahlen (zufällige Zuteilung, Experiment 3):** erste Messung Cox nur mit x 0,441 ± 0,003 und mit x und z 0,699 ± 0,003 (Wirkung 0,70 je Container); hier 0,438 ± 0,003 und 0,695 ± 0,003 (Wirkung ln 2 = 0,693 je Container, weil die App den Faktor 2 statt 0,70 nutzt).
+- **Prüfung der Formel:** Die erste Messung prüfte die geschlossene Formel an einem Punkt (HR(5,5) = 1,48, ln = 0,39, gegen die mittlere Phase 0,406). Eine Punktprüfung ist grob, weil Cox in einem Fenster über viele Zeiten mittelt; hier steht stattdessen der Grenzwert des Cox-Schätzers im Fenster (Integration über die Formel), gegen den die Läufe in 15 Zellen gezählt werden (Befund 1). Der Punkt der ersten Messung bleibt als Handwert in `tests/test_model.py`.
+- **Neu gegenüber der ersten Messung:** die Zellen ohne Wirkung (Befund 2), die gemessene mittlere Anfälligkeit der Übrigen (Befund 3), die Abhängigkeit des einzelnen Hazard-Verhältnisses von der Nachbeobachtung (Befund 4), v = 3 und andere Faktoren und Stichprobengrößen.
+- **Ursprünglich offen: „RMST-Differenz gegen Hazard bei denselben Daten“.** Gebaut als Experiment 4 (Befund 6), gemessen als Differenz und Überdeckung des Intervalls, nicht als Trennschärfe-Vergleich zweier Tests.
+- **Offen bleibt:** Die Gamma-Verteilung der Anfälligkeit ist eine Annahme; ob echte Hafendaten so streuen, zeigt die Demo nicht.
+- **Schnelle Cox-Anpassung:** Zuerst war nur der Kern vorgesehen. Die Schleife des Kerns über die Ereigniszeiten ist für 200 Läufe mit je neun Anpassungen und n = 2000 zu langsam für eine App; `cox_fast` (vektorisierte Hesse-Matrix) ersetzt sie für die Läufe und wird in den Tests gegen den Kern (40 Instanzen, bis 1e-9) und gegen eine Nullstellensuche ohne Newton gehalten. Der Kern bleibt für die Einzelanpassung mit Status zuständig (Handbeispiele, Tests).
+- **Streit als Streit, ohne Urteil:** Die Positionen stehen mit ihren Lesestufen nebeneinander. Die App und diese README urteilen nicht über das Hazard-Verhältnis selbst, sie sagen nur „in dieser Annahme verändert es sich so“ (ein Test sucht Urteilswörter in beiden Texten).
+- **Regler der Klassen:** Die Raten der Klasse A (0,2 bis 1,0) und der Klasse B (1,5 bis 10) überlappen sich nicht, damit B immer die schnellere Klasse ist; die erste Messung nannte nur das Beispiel 1 und 4 mit Anteil 50 %.
 - **Kern:** Die Kopie enthält die Verbesserung vom 2026-11-10 (Trennungserkennung auch bei einem einzigen Ereignis, große Standardfehler oder |β̂| > 20 gelten als nicht konvergiert); die Demo braucht keinen eigenen Wrapper dafür.
-- **Footer:** Die Linie Überlebenszeit hat noch keine Konzepte-Spezifikation; der Footer verweist deshalb auf `demos.html` und ist vor der Website-Einbindung auf die Linie umzustellen.
-- **Kein PDF-Export** (der Auftrag der Linie verlangt ihn nicht; die App zeigt alle Zahlen auf der Seite).
+- **Kein PDF-Export:** Die App zeigt alle Zahlen auf der Seite.
 
 ## Tests
 
@@ -300,7 +298,7 @@ Die Orakel-Tests brauchen SciPy (`requirements-dev.txt`, nicht in der Laufzeit);
 | `.gitignore` | venv, Caches, Streamlit-Secrets |
 | `.streamlit/config.toml` | Streamlit-Einstellungen (keine Nutzungsstatistik) |
 | `app.py` | Streamlit-App: vier Experimente, Streit, Annahmen, Formeln |
-| `hzv_core.py` | Kopie aus `ueberlebenszeit-planung/kern/uz_core.py` (SplitMix64, Eingabeprüfung, Kaplan–Meier mit Greenwood-Band, mittlere Lebenszeit, Cox) |
+| `hzv_core.py` | Kopie des gemeinsamen Kerns `uz_core.py` der Überlebenszeit-Linie (Stand 2026-11-10; SplitMix64, Eingabeprüfung, Kaplan–Meier mit Greenwood-Band, mittlere Lebenszeit, Cox) |
 | `hzv_scenario.py` | Welten (Zwei Klassen, Gamma-Anfälligkeit, zweites Merkmal), Gamma-Zufallszahlen aus SplitMix64 |
 | `hzv_model.py` | Gesetze (Mischung, Gamma), Grenzwert des Cox-Schätzers, schnelle Cox-Anpassung, Studien, Auswertung von Experiment 4 |
 | `hzv_evaluation.py` | Kennzahlen, Texte und Verdikte als reine Funktionen |
@@ -317,9 +315,8 @@ Die Orakel-Tests brauchen SciPy (`requirements-dev.txt`, nicht in der Laufzeit);
 - **Nachbau der Women's-Health-Initiative-Studie** und jeder Vergleich mit den Zahlen von Hernán (2010) oder Abrahamowicz u. a. (2025): Die Demo hat andere Welten und vergleicht keine Zahlen.
 - **Kreuzung unter 1, frühe Schädigung, Nichteinnahme, echte biologische Zeitabhängigkeit:** nicht gebaut (die Wirkung je Container ist konstant und beschleunigt die Abholung).
 - **Kausale Diagramme und Störfaktoren:** die Demo teilt zufällig zu und zeigt keine Auswahl in die Gruppen; Auswahl und Kausalbegriff gehören in die Linie der kausalen Diagramme (nicht Teil dieser Demo).
-- **Zufällige Zensierung und informatives Zensieren:** hier nur feste Zensierzeiten; das Stück „Informatives Zensieren“ der Linie prüft die Annahme.
-- **Vergleich der Trennschärfe von RMST-Test und Log-Rank-Test, Niveau bei nach den Daten gewähltem τ:** nicht gemessen (siehe Stück „Log-Rank und mittlere Lebenszeit“ der Linie).
-- **Zusammenlegung mit Stück 5** (Plan-Entscheidung Z4 für den Fall einer verkürzten Linie): nicht umgesetzt, Stück 5 und 6 bleiben getrennt.
+- **Zufällige Zensierung und informatives Zensieren:** hier nur feste Zensierzeiten; die Annahme prüft die [informatives-zensieren-demo](https://github.com/sebastian-hanisch/informatives-zensieren-demo) der Linie.
+- **Vergleich der Trennschärfe von RMST-Test und Log-Rank-Test, Niveau bei nach den Daten gewähltem τ:** nicht gemessen (zur mittleren Lebenszeit beim Gruppenvergleich siehe [log-rank-demo](https://github.com/sebastian-hanisch/log-rank-demo)).
 - **PDF-Export.**
 
 ## Lokal ausführen
@@ -345,4 +342,4 @@ Gebaut mit Streamlit, Plotly und NumPy; Orakel-Tests mit SciPy.
 
 ---
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html).
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Überlebenszeit: zensierte Zeiten lesen](https://sebastianhanisch.net/konzepte-ueberlebenszeit.html).

@@ -277,7 +277,7 @@ st.markdown(md_table(
         ["**Hernán (2010)**, Epidemiology 21(1):13–15 (Kommentar)", "Volltext über Abruf",
          "Ein über die Nachbeobachtung gemitteltes HR hängt von deren Dauer ab. Periodenspezifische HR enthalten eine eingebaute Auswahlverzerrung: Anfälligere der behandelten Gruppe scheiden früher aus, "
          "späte HR sinken Richtung oder unter 1. Empfohlen: angepasste Überlebenskurven und eine "
-         "Reihe gemittelter HR. Der Text enthält weder eine Simulation noch eine Herleitung. *Lesart des Lektüre-Berichts dieser Linie (nicht wörtlich bei Hernán belegt):* Die Verzerrung setzt eine Wirkung der Behandlung voraus (etwa frühe Schädigung); bei strenger Nullwirkung gibt es sie nicht; bei Ying und Xu steht dazu sinngemäß, die Gruppen nach dem Überleben seien nur unter der scharfen Nullhypothese identisch (nicht wörtlich geprüft).",
+         "Reihe gemittelter HR. Der Text enthält weder eine Simulation noch eine Herleitung. *Eigene Lesart (nicht wörtlich bei Hernán belegt):* Die Verzerrung setzt eine Wirkung der Behandlung voraus (etwa frühe Schädigung); bei strenger Nullwirkung gibt es sie nicht; bei Ying und Xu steht dazu sinngemäß, die Gruppen nach dem Überleben seien nur unter der scharfen Nullhypothese identisch (nicht wörtlich geprüft).",
          "Der Mechanismus tritt in Experiment 2 auf (HR der Übrigen sinkt gegen 1), die Abhängigkeit von der Nachbeobachtung in der Tabelle darunter, und ohne Wirkung (Faktor 1) gibt es keinen Drift. "
          "Nicht gezeigt: ein Fall unter 1 (hier beschleunigt die Maßnahme in jedem Container die Abholung), und wie stark der Effekt in echten Studien ist."],
         ["**Abrahamowicz u. a. (2025)**, Eur. J. Epidemiol. 40(6):611–629 (Simulationen, Fallstudien)", "Volltext über Abruf (rund 100 000 von 122 000 Zeichen; Referenzen und Zusatzmaterial fehlen)",
@@ -301,7 +301,7 @@ st.markdown(md_table(
     ],
 ))
 st.caption(
-    "Die in der Neuanalyse genannte Übersicht über 27 große Studien (Strobel u. a. 2023) wurde nicht gefunden und ist hier nicht verwendet. Hernán (2010), die Neuanalyse 2025 und Royston und Parmar (2013) sind nur über "
+    "Die in Abrahamowicz u. a. (2025) genannte Übersicht über 27 große Studien (Strobel u. a. 2023) wurde nicht gefunden und ist hier nicht verwendet. Hernán (2010), Abrahamowicz u. a. (2025) und Royston und Parmar (2013) sind nur über "
     "Abruf-Zusammenfassungen gelesen: Zahlen und Satzbau stehen unter dem Vorbehalt, im PDF gegengelesen zu werden."
 )
 
@@ -383,5 +383,5 @@ st.markdown("---")
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
     "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
-    "Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html)."
+    "Mehr zur Reihe: [Überlebenszeit: zensierte Zeiten lesen](https://sebastianhanisch.net/konzepte-ueberlebenszeit.html)."
 )
